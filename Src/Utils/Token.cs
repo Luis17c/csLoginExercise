@@ -4,10 +4,14 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 
+
 namespace Utils {
     public class Token {
         public static string Generate(User user) {
-            var key = Encoding.ASCII.GetBytes("102030405060708090100110120130140150160170180190200");
+            var builder = WebApplication.CreateBuilder();
+            var configuration = builder.Configuration;
+
+            var key = Encoding.ASCII.GetBytes(configuration["Token:Key"]);
             var tokenConfig = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[] {
                     new ("userId", user.id.ToString()),

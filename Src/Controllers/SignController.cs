@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Dtos;
 using Utils;
-using System.Text;
 
 namespace loginExercise.Controllers;
 

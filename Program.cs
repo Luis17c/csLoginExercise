@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -39,6 +40,13 @@ builder.Services.AddSwaggerGen(x => {
 builder.Services.AddTransient<Interfaces.IUserRepository, Repositories.UserRepository>();
 builder.Services.AddTransient<Interfaces.ICrypt, Utils.Crypt>();
 
+// Auth config
+builder.Services.AddAuthentication()
+    .AddFacebook(options => {
+        options.AppId = configuration["Authentication:Facebook:AppId"];
+        options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+    });
+
 // CORS
 builder.Services.AddCors(options => {
     options.AddPolicy(name: "MyPolice", 
@@ -49,7 +57,7 @@ builder.Services.AddCors(options => {
 });
 
 // JWT config
-var key = Encoding.ASCII.GetBytes("102030405060708090100110120130140150160170180190200");
+var key = Encoding.ASCII.GetBytes(configuration["Token:Key"]);
 builder.Services.AddAuthentication(x => 
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
