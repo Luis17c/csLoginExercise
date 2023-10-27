@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace loginExercise.Migrations
 {
     [DbContext(typeof(DbConnection))]
-    [Migration("20231026171603_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231027181252_InitalMigrate")]
+    partial class InitalMigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +32,14 @@ namespace loginExercise.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("createdAt")
+                    b.Property<DateTime?>("createdAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("email")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("facebookId")
                         .HasColumnType("text");
 
                     b.Property<string>("name")
@@ -44,10 +47,9 @@ namespace loginExercise.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("updatedAt")
+                    b.Property<DateTime?>("updatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("id");

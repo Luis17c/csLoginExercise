@@ -1,8 +1,9 @@
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Dtos;
+using DTOs;
 using Utils;
+using System.Text.Json;
 
 namespace loginExercise.Controllers;
 
@@ -20,9 +21,9 @@ public class SignController : ControllerBase
 
     [HttpPost]
     [Route("signUp")]
-    public ActionResult<User> Post(UserSignUpDTO newUser)
+    public ActionResult<User> SignUp(UserSignUpDTO newUser)
     {   
-        User user = new(newUser.name, newUser.email, newUser.password);
+        User user = new(newUser.name, newUser.email, newUser.password, null);
 
         User emailAlreadyInUse = _userRepository.GetByEmail(user.email);
         
@@ -39,7 +40,7 @@ public class SignController : ControllerBase
 
     [HttpPost]
     [Route("signIn")]
-    public ActionResult<string> Get(UserSignInDTO signData)
+    public ActionResult<string> SignIn(UserSignInDTO signData)
     {
         User user = _userRepository.GetByEmail(signData.email);;
 
@@ -48,6 +49,30 @@ public class SignController : ControllerBase
 
         if (!_crypt.compare(signData.password, user.password)) {
             return BadRequest("Wrong password or email");
+        }
+
+        return Ok(Token.Generate(user));
+    }
+
+    [HttpPost]
+    [Route("facebookAuth/{accessToken}")]
+    public ActionResult FacebookAuth(string accessToken) {
+
+        FbUserData fbUserData;
+
+        using var client = new HttpClient();
+        fbUserData = JsonSerializer.Deserialize<FbUserData>(client.GetAsync(
+            $"https://graph.facebook.com/me?access_token={accessToken}&fields=id,name,email,picture.width(100).height(100)"
+        ).Result.Content.ReadAsStringAsync().Result);
+
+        User user;
+
+        user = _userRepository.GetByFbId(fbUserData.id);
+
+        if (user == null) {
+            user = new (fbUserData.name, fbUserData.email, null, fbUserData.id);
+            _userRepository.Add(user);
+            user = _userRepository.GetByEmail(user.email);
         }
 
         return Ok(Token.Generate(user));

@@ -29,11 +29,14 @@ namespace loginExercise.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("createdAt")
+                    b.Property<DateTime?>("createdAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("email")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("facebookId")
                         .HasColumnType("text");
 
                     b.Property<string>("name")
@@ -41,10 +44,9 @@ namespace loginExercise.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("updatedAt")
+                    b.Property<DateTime?>("updatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("id");

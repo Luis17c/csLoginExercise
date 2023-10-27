@@ -78,3 +78,4 @@ C:\Users\luisc\Desktop\loginExercise\bin\Debug\net7.0\Microsoft.Extensions.Depen
 C:\Users\luisc\Desktop\loginExercise\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\luisc\Desktop\loginExercise\bin\Debug\net7.0\System.CodeDom.dll
 C:\Users\luisc\Desktop\loginExercise\bin\Debug\net7.0\CryptSharp.dll
+C:\Users\luisc\Desktop\loginExercise\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.Facebook.dll

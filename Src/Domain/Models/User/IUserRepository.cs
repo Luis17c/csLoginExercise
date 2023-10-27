@@ -8,6 +8,8 @@ namespace Interfaces {
         User GetByEmail(string email);
 
         User GetById(int id);
+        
+        User GetByFbId(string fbId);
     }
     
 }

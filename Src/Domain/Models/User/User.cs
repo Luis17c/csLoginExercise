@@ -11,12 +11,17 @@ namespace Models {
         public string name { get; set; }
         public string email { get; set; }
         [JsonIgnore]
-        public string password { get; set; }
+        public string ?password { get; set; }
 
-        public User(string name, string email, string password) {
+        public string ?facebookId { get; set; }
+
+        public User(string name, string email, string ?password, string ?facebookId) {
             this.name = name;
             this.email = email;
-            this.password = password;
+            if (password != null)
+                this.password = password;
+            if (facebookId != null)
+                this.facebookId = facebookId;
         }
     }
 }

@@ -1,5 +1,4 @@
 using Interfaces;
-using Microsoft.OpenApi.Any;
 using Models;
 
 namespace Repositories {
@@ -26,6 +25,14 @@ namespace Repositories {
         public User GetById(int id) {
             User user = _context.Users.Where(
                 user => user.id == id
+            ).FirstOrDefault();
+
+            return user;
+        }
+
+        public User GetByFbId(string fbId) {
+            User user = _context.Users.Where(
+                user => user.facebookId == fbId
             ).FirstOrDefault();
 
             return user;

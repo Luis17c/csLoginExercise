@@ -1,4 +1,4 @@
-namespace Dtos {
+namespace DTOs {
     public class UserSignUpDTO {
         public required string name { get; set; }
         public required string email { get; set; }
