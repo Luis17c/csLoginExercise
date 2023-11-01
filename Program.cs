@@ -45,7 +45,12 @@ builder.Services.AddAuthentication()
     .AddFacebook(options => {
         options.AppId = configuration["Authentication:Facebook:AppId"];
         options.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+    })
+    .AddGoogleOpenIdConnect(options => {
+        options.ClientId = configuration["Authentication:Google:ClientId"];
+        options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
     });
+
 
 // CORS
 builder.Services.AddCors(options => {

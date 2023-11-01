@@ -67,10 +67,34 @@ public class SignController : ControllerBase
 
         User user;
 
-        user = _userRepository.GetByFbId(fbUserData.id);
+        user = _userRepository.GetByEmail(fbUserData.email);
 
         if (user == null) {
-            user = new (fbUserData.name, fbUserData.email, null, fbUserData.id);
+            user = new (fbUserData.name, fbUserData.email, null, fbUserData.picture.data.url);
+            _userRepository.Add(user);
+            user = _userRepository.GetByEmail(user.email);
+        }
+
+        return Ok(Token.Generate(user));
+    }
+
+    [HttpPost]
+    [Route("googleAuth/{accessToken}")]
+    public ActionResult GoogleAuth(string idToken) {
+
+        GoogleResponse googleResponse;
+
+        using var client = new HttpClient();
+        googleResponse = JsonSerializer.Deserialize<GoogleResponse>(client.GetAsync(
+            $"https://oauth2.googleapis.com/tokeninfo?id_token={idToken}"
+        ).Result.Content.ReadAsStringAsync().Result);
+
+        User user;
+
+        user = _userRepository.GetByEmail(googleResponse.email);
+
+        if (user == null) {
+            user = new (googleResponse.name, googleResponse.email, null, googleResponse.picture);
             _userRepository.Add(user);
             user = _userRepository.GetByEmail(user.email);
         }
@@ -78,3 +102,5 @@ public class SignController : ControllerBase
         return Ok(Token.Generate(user));
     }
 }
+
+

@@ -10,18 +10,17 @@ namespace Models {
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public string ?photo { get; set;}
         [JsonIgnore]
         public string ?password { get; set; }
-
-        public string ?facebookId { get; set; }
-
-        public User(string name, string email, string ?password, string ?facebookId) {
+        
+        public User(string name, string email, string ?password, string? photo) {
             this.name = name;
             this.email = email;
             if (password != null)
                 this.password = password;
-            if (facebookId != null)
-                this.facebookId = facebookId;
+            if (photo != null)
+                this.photo = photo;
         }
     }
 }

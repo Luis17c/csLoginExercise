@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Google.Apis.Auth.AspNetCore3": {
+              "target": "Package",
+              "version": "[1.63.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",
               "version": "[7.0.13, )"
