@@ -30,12 +30,10 @@ namespace Repositories {
             return user;
         }
 
-        public User GetByFbId(string fbId) {
-            User user = _context.Users.Where(
-                user => user.facebookId == fbId
-            ).FirstOrDefault();
-
-            return user;
+        public bool Edit(User user) {
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

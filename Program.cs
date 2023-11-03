@@ -39,6 +39,11 @@ builder.Services.AddSwaggerGen(x => {
 // Dependecy Injection
 builder.Services.AddTransient<Interfaces.IUserRepository, Repositories.UserRepository>();
 builder.Services.AddTransient<Interfaces.ICrypt, Utils.Crypt>();
+if (builder.Environment.IsDevelopment()) {
+    builder.Services.AddTransient<Interfaces.IStorage, Utils.DiskStorage>();
+} else {
+    builder.Services.AddTransient<Interfaces.IStorage, Utils.AwsStorage>();
+}
 
 // Auth config
 builder.Services.AddAuthentication()
@@ -86,6 +91,7 @@ if (app.Environment.IsDevelopment())
     app.UseExceptionHandler("/error-development");
     app.UseSwagger();
     app.UseSwaggerUI();
+
 } else {
     app.UseExceptionHandler("/error");
 };

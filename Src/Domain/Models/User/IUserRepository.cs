@@ -9,7 +9,7 @@ namespace Interfaces {
 
         User GetById(int id);
         
-        User GetByFbId(string fbId);
+        bool Edit(User user);
     }
     
 }

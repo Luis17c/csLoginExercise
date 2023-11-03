@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace loginExercise.Migrations
 {
     [DbContext(typeof(DbConnection))]
-    [Migration("20231027181252_InitalMigrate")]
-    partial class InitalMigrate
+    [Migration("20231103145811_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,14 +39,14 @@ namespace loginExercise.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("facebookId")
-                        .HasColumnType("text");
-
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("photo")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("updatedAt")

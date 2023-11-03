@@ -36,14 +36,14 @@ namespace loginExercise.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("facebookId")
-                        .HasColumnType("text");
-
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("photo")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("updatedAt")
