@@ -17,4 +17,4 @@ Em ambiente de desenvolvimento, as imagens são armazenadas localmente na pasta 
 
 Postgres exposto em 5432 e o app em 5161.
 
-Swagger: http://localhost:5161/swagger/index.html
+Com servidor rodando, swagger disponível em http://your-ip:5161/swagger/index.html
