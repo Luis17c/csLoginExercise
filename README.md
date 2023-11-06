@@ -9,7 +9,7 @@ Declarando key JWT (É necessário que a key tenha mais de 256 bytes): ````dotne
 
 Buildando as imagems: ````docker-compose build````
 
-Rodando migrations: ````dotnet ef database update````
+Suba o serviço do postgres e rode migrations: ````dotnet ef database update````
 
 Instanciando as imagens: ````docker-compose up````
 
