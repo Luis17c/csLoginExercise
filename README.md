@@ -1,3 +1,16 @@
-# csLoginExercise
+<h1> csLoginSys </h1>
 
-Exercicios para aprender C# e .NET
+Sistema básico de Login feito em C# usando .NET
+Implementa token JWT e validação dos requests com FluentValidation.
+
+<h2> Configuração Inicial </h2>
+
+Declarando key JWT (É necessário que a key tenha mais de 256 bytes): ````dotnet user-secrets "Token:Key" "your-secret"````
+
+Buildando as imagems: ````docker-compose build````
+
+Rodando migrations: ````dotnet ef database update````
+
+Instanciando as imagens: ````docker-compose up````
+
+Em ambiente de desenvolvimento, as imagens são armazenadas localmente na pasta Tmp, em produção é instanciado o armazenamento pela AWS, porém a implementação dos métodos.
